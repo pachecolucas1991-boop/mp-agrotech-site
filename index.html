@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MP Agrotech · Tecnologia e gestão para o agronegócio</title>
+<meta name="description" content="MP Agrotech: especialista em sistemas de gestão ERP e em tecnologia para o agronegócio. Implantação, consultoria especializada, gestão de processos e outsourcing.">
+<link rel="icon" href="img/logo-cor.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Source+Sans+3:wght@400;600&display=swap">
+<style>
+/* Paleta da marca: azul-marinho da logo + verdes da folha */
+:root{
+  --navy:#383C57; --navy-2:#2A2D44; --navy-3:#20233A;
+  --green:#7DC242; --green-2:#3AAA4A;
+  --ink:#23263A; --muted:#5B6075; --line:#E1E3EA; --bg:#FFFFFF; --soft:#F4F5F8;
+  --f-head:"Montserrat", "Segoe UI", Arial, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", Arial, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--f-body);font-size:17px;line-height:1.6;color:var(--ink);background:var(--bg)}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1140px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-head);line-height:1.15;margin:0;text-wrap:balance}
+h2{font-size:clamp(26px,3.2vw,36px);color:var(--navy)}
+.eyebrow{font-family:var(--f-head);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--green-2);margin:0 0 10px}
+.lead{color:var(--muted);max-width:62ch;margin:14px 0 0}
+
+/* Topo */
+header{position:sticky;top:0;z-index:10;background:var(--navy);box-shadow:0 1px 0 rgba(255,255,255,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:14px}
+.nav .logo img{height:38px;width:auto}
+.menu{display:flex;gap:6px;align-items:center;list-style:none;margin:0;padding:0}
+.menu>li{position:relative}
+.menu a,.menu button{font:600 15px var(--f-head);color:#fff;text-decoration:none;background:none;border:0;padding:10px 12px;border-radius:8px;cursor:pointer}
+.menu a:hover,.menu button:hover,.menu a:focus-visible,.menu button:focus-visible{background:rgba(255,255,255,.1);outline:none}
+.menu .cta{background:var(--green);color:var(--navy-3)}
+.menu .cta:hover{background:#8fd152}
+.drop{display:none;position:absolute;top:100%;left:0;min-width:280px;background:#fff;border-radius:12px;box-shadow:0 12px 30px rgba(20,22,40,.18);padding:8px;list-style:none;margin:6px 0 0}
+.drop a{display:block;color:var(--ink);font-weight:600;padding:10px 12px}
+.drop a small{display:block;font:400 13px var(--f-body);color:var(--muted)}
+.drop a:hover{background:var(--soft)}
+.drop .sep{border-top:1px solid var(--line);margin-top:6px;padding-top:6px}
+:target{scroll-margin-top:80px}
+.brands{display:flex;align-items:center;gap:14px;margin-top:22px;opacity:.75}
+.brands small{font:600 12px var(--f-head);letter-spacing:.1em;text-transform:uppercase;color:#b9bdd0}
+.brands img{height:16px;width:auto}
+.plogo{height:64px;display:flex;align-items:center;margin-bottom:18px}
+.plogo img{height:auto;width:240px;max-width:100%;max-height:64px;object-fit:contain;object-position:left center}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* Dores */
+.pains{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:960px){.pains{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.pains{grid-template-columns:1fr}}
+.pain{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pain .q{font:700 17px/1.3 var(--f-head);color:var(--navy);margin:0}
+.pain .a{margin:0;color:var(--muted);font-size:16px}
+.pain .a b{color:var(--green-2);font-weight:600}
+.pain .to{margin-top:auto;font:600 13px var(--f-head);color:var(--navy);text-decoration:none;border-top:1px solid var(--line);padding-top:10px}
+.pain .to:hover{color:var(--green-2)}
+/* Demonstração */
+.demo{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:start}
+@media (max-width:860px){.demo{grid-template-columns:1fr;gap:24px}}
+.form{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px;display:grid;gap:14px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:620px){.form .row{grid-template-columns:1fr}}
+.form label{display:grid;gap:6px;font:600 14px var(--f-head);color:var(--navy)}
+.form input,.form select,.form textarea{font:16px var(--f-body);color:var(--ink);border:1px solid #cfd2dc;border-radius:10px;padding:11px 12px;background:#fff;width:100%}
+.form textarea{min-height:90px;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus{outline:2px solid var(--green);border-color:var(--green)}
+.form .btn{border:0;cursor:pointer;justify-self:start}
+.form .note{font-size:13px;color:var(--muted);margin:0}
+.steps{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:14px;counter-reset:s}
+.steps li{display:flex;gap:12px;align-items:flex-start;counter-increment:s}
+.steps li::before{content:counter(s);flex:0 0 30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font:700 14px/30px var(--f-head);text-align:center}
+/* FAQ */
+.faq{display:grid;gap:10px;max-width:860px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 20px}
+.faq summary{cursor:pointer;list-style:none;font:700 16px var(--f-head);color:var(--navy);padding:16px 28px 16px 0;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:0;top:12px;font-size:22px;color:var(--green-2)}
+.faq details[open] summary::after{content:"–"}
+.faq details p{margin:0 0 16px;color:var(--muted)}
+/* Suporte */
+.support{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:860px){.support{grid-template-columns:1fr}}
+.support .card h3{font-size:19px}
+.support .card a{color:var(--green-2);font-weight:600;overflow-wrap:anywhere}
+.social{display:inline-flex;align-items:center;gap:8px;color:#d7d9e5;text-decoration:none}
+.social svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2}
+.card .more{display:inline-block;margin-top:14px;font:700 14px var(--f-head);color:var(--green-2);text-decoration:none}
+.card .more:hover{text-decoration:underline}
+.benefits{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
+.benefits li{padding-left:16px;border-left:3px solid var(--green)}
+.benefits b{color:var(--navy)}
+.has-drop:hover .drop,.has-drop:focus-within .drop{display:block}
+.toggle{display:none}
+@media (max-width:860px){
+  .toggle{display:block;font:700 15px var(--f-head);color:#fff;background:rgba(255,255,255,.12);border:0;border-radius:8px;padding:9px 14px}
+  .menu{display:none;position:absolute;left:0;right:0;top:100%;background:var(--navy-2);flex-direction:column;align-items:stretch;padding:10px 20px 18px}
+  .menu.open{display:flex}
+  .drop{display:block;position:static;box-shadow:none;background:transparent;padding:0 0 0 12px;margin:0}
+  .drop a{color:#d9dbe6}.drop a small{color:#aeb2c6}
+  .drop a:hover{background:rgba(255,255,255,.06)}
+}
+
+/* Hero */
+.hero{background:radial-gradient(1200px 500px at 85% 20%,rgba(125,194,66,.18),transparent 60%),linear-gradient(160deg,var(--navy) 0%,var(--navy-3) 100%);color:#fff;overflow:hidden}
+.hero .wrap{padding-top:72px}
+.hero h1{font-size:clamp(32px,4.6vw,52px);font-weight:800}
+.hero h1 span{color:var(--green)}
+.hero p{color:#d7d9e5;font-size:19px;max-width:54ch;margin:18px 0 28px}
+.hero .copy{padding-bottom:72px;max-width:760px}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;font:700 16px var(--f-head);text-decoration:none;padding:14px 22px;border-radius:10px}
+.btn.primary{background:var(--green);color:var(--navy-3)}
+.btn.primary:hover{background:#8fd152}
+.btn.ghost{border:2px solid rgba(255,255,255,.35);color:#fff}
+.btn.ghost:hover{border-color:#fff}
+.hero .pic{align-self:end;justify-self:center;max-width:380px}
+.hero .pic img{border-radius:24px 24px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.25)}
+.stats{display:flex;flex-wrap:wrap;gap:28px;margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14)}
+.stats div{font:700 15px var(--f-head);color:#fff}
+.stats span{display:block;font:400 14px var(--f-body);color:#b9bdd0}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-top:44px}.hero .copy{padding-bottom:10px}.hero .pic{max-width:300px}}
+
+section{padding-block:80px}
+.soft{background:var(--soft)}
+.head{margin-bottom:36px}
+
+/* Cards */
+.grid{display:grid;gap:22px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:860px){.g2,.g3{grid-template-columns:1fr}}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;min-width:0}
+.card .tag{display:inline-block;font:700 12px var(--f-head);letter-spacing:.08em;text-transform:uppercase;color:var(--navy);background:#EAF6DF;border-radius:999px;padding:5px 12px;margin-bottom:14px}
+.card h3{font-size:22px;color:var(--navy);margin-bottom:10px}
+.card p{margin:0 0 14px;color:var(--muted)}
+.card ul{margin:0;padding-left:18px;color:var(--ink)}
+.card li{margin:4px 0}
+.icon{width:46px;height:46px;border-radius:12px;background:var(--navy);display:grid;place-items:center;margin-bottom:16px}
+.icon svg{width:24px;height:24px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* Segmentos */
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.chips span{font:600 15px var(--f-head);color:var(--navy);background:#fff;border:1px solid var(--line);border-radius:999px;padding:9px 16px}
+
+/* Diferenciais */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media (max-width:860px){.split{grid-template-columns:1fr;gap:28px}}
+.checks{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.checks li{display:flex;gap:12px;align-items:flex-start}
+.checks li::before{content:"";flex:0 0 22px;height:22px;margin-top:3px;border-radius:50%;background:var(--green) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2320233A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L19 8'/%3E%3C/svg%3E") center/14px no-repeat}
+.values{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.values span{font-size:14px;color:var(--muted);border-left:3px solid var(--green);padding:2px 10px}
+
+/* Contato */
+.contact{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-3) 100%);color:#fff}
+.contact h2{color:#fff}
+.contact .lead{color:#c9ccdb}
+.cbox{display:grid;grid-template-columns:260px 1fr;gap:36px;align-items:center;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:28px;margin-top:32px}
+.cbox img{border-radius:16px;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:top;align-self:center}
+.cbox h3{font-size:24px;margin-bottom:6px}
+.cbox .who{color:var(--green);font:700 14px var(--f-head);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.cbox dl{display:grid;grid-template-columns:auto 1fr;gap:8px 18px;margin:18px 0 22px}
+.cbox dt{color:#aeb2c6}
+.cbox dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+@media (max-width:760px){.cbox{grid-template-columns:1fr}.cbox img{max-width:220px}}
+
+footer{background:var(--navy-3);color:#aeb2c6;font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;padding-block:28px}
+footer img{height:28px;width:auto}
+/* texto da logo MP ocupa 47%–84% da altura: alinhamos a Viasoft pela mesma faixa */
+.flogos{display:flex;align-items:flex-start;gap:16px}
+.flogos img{height:40px;width:auto}
+.flogos .fvia{height:14.8px;margin-top:18.8px}
+.fsep{width:1px;height:18px;margin-top:17px;background:rgba(255,255,255,.25)}
+footer a{color:#d7d9e5}
+:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#inicio" aria-label="MP Agrotech, início"><img src="img/logo-branca.png" alt="MP Agrotech"></a>
+    <button class="toggle" id="toggle" aria-expanded="false" aria-controls="menu">Menu</button>
+    <ul class="menu" id="menu">
+      <li class="has-drop"><button type="button" aria-haspopup="true">Soluções ▾</button>
+        <ul class="drop">
+          <li><a href="#agrotitan">Viasoft Agrotitan</a></li>
+          <li><a href="#filt">Viasoft Filt</a></li>
+          <li><a href="#crm">Viasoft CRM</a></li>
+          <li><a href="#analytics">Viasoft Analytics (BI)</a></li>
+          <li class="sep"><a href="#implantacao">Implantação</a></li>
+          <li><a href="#consultoria-processos">Consultoria</a></li>
+        </ul>
+      </li>
+      <li class="has-drop"><button type="button" aria-haspopup="true">Serviços ▾</button>
+        <ul class="drop">
+          <li><a href="#consultoria">Consultoria especializada em software</a></li>
+          <li><a href="#processos">Gestão de processos</a></li>
+          <li><a href="#outsourcing">Outsourcing</a></li>
+        </ul>
+      </li>
+      <li><a href="#sobre">Quem somos</a></li>
+      <li><a href="#suporte">Suporte</a></li>
+      <li><a class="cta" href="#demonstracao">Agende uma demonstração</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio" style="padding-block:0">
+  <div class="wrap">
+    <div class="copy">
+      <p class="eyebrow" style="color:var(--green)">Tecnologia para o agronegócio</p>
+      <h1>Gestão que acompanha o ritmo do <span>campo</span>.</h1>
+      <p>A MP Agrotech é especialista em sistemas de gestão ERP e em tecnologia para o agronegócio. Implantamos, parametrizamos e acompanhamos sistemas de gestão para cooperativas, cerealistas, revendas e agroindústrias.</p>
+      <div class="btns">
+        <a class="btn primary" href="#demonstracao">Agende uma demonstração</a>
+        <a class="btn ghost" href="#solucoes">Conhecer as soluções</a>
+      </div>
+      <div class="stats">
+        <div>Atendimento próximo<span>consultores que conhecem a sua operação</span></div>
+        <div>Foco exclusivo no agro<span>equipe experiente em ERP</span></div>
+        <div>Da venda ao pós-implantação<span>acompanhamento contínuo</span></div>
+      </div>
+      <div class="brands"><img src="https://pages.viasoft.com.br/marcas/viasoft/assets/logos/viasoft-h-branco.svg" alt="Viasoft" width="128" height="16"></div>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="dores">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Problemas que resolvemos</p>
+      <h2>Alguma dessas situações acontece na sua empresa?</h2>
+      <p class="lead">São os problemas que mais encontramos em cooperativas, cerealistas, revendas e agroindústrias. Para cada um, existe um caminho.</p>
+    </div>
+    <div class="pains">
+      <article class="pain">
+        <h3 class="q">O caixa fecha, mas os números não batem com o banco?</h3>
+        <p class="a">Conciliação e fluxo de caixa integrados ao financeiro, com <b>fechamento confiável</b> todo dia.</p>
+        <a class="to" href="#agrotitan">Viasoft Agrotitan →</a>
+      </article>
+      <article class="pain">
+        <h3 class="q">O estoque do sistema é diferente do que está no barracão?</h3>
+        <p class="a">Estoque por lote e localização, com movimentação registrada da entrada à expedição, para <b>saber o que tem e onde está</b>.</p>
+        <a class="to" href="#agrotitan">Viasoft Agrotitan e Filt →</a>
+      </article>
+      <article class="pain">
+        <h3 class="q">Peso, umidade e descontos dos grãos ainda dependem de anotação?</h3>
+        <p class="a">Recebimento e expedição de grãos com <b>regras de classificação e descontos no sistema</b>, sem retrabalho.</p>
+        <a class="to" href="#agrotitan">Viasoft Agrotitan →</a>
+      </article>
+      <article class="pain">
+        <h3 class="q">Preço de venda calculado na planilha, sem saber a margem real?</h3>
+        <p class="a">Precificação e rentabilidade por pedido, marca e grupo de itens, para <b>vender sabendo quanto sobra</b>.</p>
+        <a class="to" href="#agrotitan">Viasoft Agrotitan →</a>
+      </article>
+      <article class="pain">
+        <h3 class="q">O vendedor está no campo e o pedido só chega dias depois?</h3>
+        <p class="a">Pedidos lançados no celular, <b>mesmo sem internet</b>, aprovados em tempo real e com histórico de cada cliente.</p>
+        <a class="to" href="#crm">Viasoft CRM →</a>
+      </article>
+      <article class="pain">
+        <h3 class="q">Receituário agronômico e notas fiscais tomam o dia do balcão?</h3>
+        <p class="a">Receituário e rotinas fiscais <b>gerados direto da venda</b>, com base fiscal atualizada.</p>
+        <a class="to" href="#filt">Viasoft Filt →</a>
+      </article>
+      <article class="pain">
+        <h3 class="q">O sistema existe, mas a equipe ainda trabalha em planilhas paralelas?</h3>
+        <p class="a">Consultoria de processos para <b>usar o que o sistema já oferece</b> e eliminar controles por fora.</p>
+        <a class="to" href="#consultoria-processos">Consultoria →</a>
+      </article>
+      <article class="pain">
+        <h3 class="q">A diretoria decide sem indicadores atualizados?</h3>
+        <p class="a">Painéis de vendas, compras, estoque e caixa com <b>a informação certa na hora da decisão</b>.</p>
+        <a class="to" href="#analytics">Viasoft Analytics →</a>
+      </article>
+      <article class="pain">
+        <h3 class="q">Falta gente para cuidar do sistema e atender os usuários?</h3>
+        <p class="a">Outsourcing com banco de horas de consultoria e suporte especializado <b>para a sua equipe</b>.</p>
+        <a class="to" href="#outsourcing">Outsourcing →</a>
+      </article>
+    </div>
+    <div class="btns" style="margin-top:28px"><a class="btn primary" href="#demonstracao">Quero resolver isso na minha empresa</a></div>
+  </div>
+</section>
+
+<section id="solucoes">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Soluções</p>
+      <h2>Sistemas de gestão para cada tipo de operação</h2>
+      <p class="lead">Acompanhamos cada solução de perto, desde o diagnóstico até o suporte depois da implantação.</p>
+    </div>
+    <div class="grid g2">
+      <article class="card" id="agrotitan">
+        <div class="plogo"><img src="https://pages.viasoft.com.br/marcas/agrotitan/assets/logos/agrotitan-h-colorida.svg" alt="Viasoft Agrotitan"></div>
+        <h3 class="sr-only">Viasoft Agrotitan</h3>
+        <p>Sistema de gestão criado especificamente para o agronegócio, não uma solução genérica adaptada. Atende cooperativas, cerealistas, sementeiras, agroindústrias, laticínios, revendas de insumos e fazendas.</p>
+        <ul>
+          <li>Rentabilidade por marca, grupo de itens e pedido</li>
+          <li>Precificação flexível e previsão de demanda</li>
+          <li>Fluxo de caixa dinâmico, contabilidade online e conciliação de boletos</li>
+          <li>Barter, força de vendas mobile e controle de royalties</li>
+          <li>Portal do produtor com emissão de NFP-e</li>
+          <li>Armazém de sementes com saldo e localização por lote</li>
+          <li>Aprovações por alçada conforme a hierarquia da empresa</li>
+        </ul>
+        <a class="more" href="#demonstracao" data-interesse="Viasoft Agrotitan">Agendar demonstração do Agrotitan →</a>
+      </article>
+      <article class="card" id="filt">
+        <div class="plogo"><img src="https://pages.viasoft.com.br/marcas/filt/assets/logos/filt-h-colorida.svg" alt="Logo Filt"></div>
+        <h3 class="sr-only">Viasoft Filt</h3>
+        <p>ERP em nuvem para revendas de insumos, lojas agropecuárias e produtores rurais. Interface simples, com comandos de voz e inteligência artificial, acessível pelo computador ou pelo celular.</p>
+        <ul>
+          <li>Receituário agronômico automático, com assinatura digital</li>
+          <li>Fiscal e contábil com cálculo automático de impostos</li>
+          <li>PDV integrado ao ERP em tempo real</li>
+          <li>Estoque com previsão de reposição e rastreamento</li>
+          <li>Gestão de safra: atividades, insumos e custos</li>
+          <li>Filt IA+: acompanhamento e previsão de vendas</li>
+        </ul>
+        <a class="more" href="#demonstracao" data-interesse="Viasoft Filt">Agendar demonstração do Filt →</a>
+      </article>
+      <article class="card" id="crm">
+        <div class="plogo"><img src="https://pages.viasoft.com.br/marcas/crm/assets/logos/crm-h-colorida.svg" alt="Logo Viasoft CRM"></div>
+        <h3 class="sr-only">Viasoft CRM</h3>
+        <p>Gestão de relacionamento e vendas para equipes comerciais que trabalham no campo. Roda em nuvem, com aplicativo para Android e iOS que funciona até sem internet.</p>
+        <ul>
+          <li>Funil de vendas para priorizar oportunidades</li>
+          <li>Visitas, metas e rotas integradas ao Google Maps</li>
+          <li>Pedidos lançados e aprovados em tempo real, inclusive offline</li>
+          <li>Linha do tempo do cliente e follow-ups programados</li>
+          <li>Croqui georreferenciado de talhões e laudos de campo</li>
+        </ul>
+        <a class="more" href="#demonstracao" data-interesse="Viasoft CRM">Agendar demonstração do CRM →</a>
+      </article>
+      <article class="card" id="analytics">
+        <div class="plogo"><img src="https://pages.viasoft.com.br/marcas/analytics/assets/logos/analytics-h-colorida.svg" alt="Logo Viasoft Analytics"></div>
+        <h3 class="sr-only">Viasoft Analytics</h3>
+        <p>Ferramenta de BI que reúne os dados da empresa em painéis claros, para o gestor antecipar resultados e decidir com base em informação, não em intuição.</p>
+        <ul>
+          <li>Dashboards dinâmicos e intuitivos</li>
+          <li>Análises de vendas, compras, estoque e fluxo de caixa</li>
+          <li>Indicadores de gestão de pessoas</li>
+          <li>Visão integrada de mercado, empresa e clientes</li>
+        </ul>
+        <a class="more" href="#demonstracao" data-interesse="Viasoft Analytics">Agendar demonstração do Analytics →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="implantacao-consultoria">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Implantação e consultoria</p>
+      <h2>O sistema certo, funcionando do jeito certo</h2>
+      <p class="lead">Um bom software só gera resultado quando está bem implantado e ajustado à rotina da empresa. É nesse ponto que a MP Agrotech faz a diferença.</p>
+    </div>
+    <div class="grid g2">
+      <article class="card" id="implantacao">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M5 12l4 4L19 6"/><path d="M4 20h16"/></svg></div>
+        <h3>Implantação das soluções Viasoft</h3>
+        <p>Conduzimos a implantação do Agrotitan, Filt, CRM e Analytics do início ao fim: levantamento, parametrização, migração de dados, treinamento das equipes e acompanhamento na virada.</p>
+        <ul class="benefits">
+          <li><b>Entrada em operação mais rápida</b>, com cronograma claro e etapas validadas com a sua equipe</li>
+          <li><b>Menos risco na virada</b>, com dados migrados e conferidos antes de rodar</li>
+          <li><b>Equipe preparada</b>, com treinamento prático por área e por função</li>
+          <li><b>Sistema parametrizado para a sua realidade</b>, respeitando regras fiscais, comerciais e operacionais</li>
+          <li><b>Acompanhamento pós-implantação</b> até a operação estar estável</li>
+        </ul>
+      </article>
+      <article class="card" id="consultoria-processos">
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></div>
+        <h3>Consultoria de processos no software</h3>
+        <p>Consultoria especializada nos softwares Viasoft para revisar como a empresa usa o sistema, corrigir desvios e aproveitar recursos que ficaram de lado.</p>
+        <ul class="benefits">
+          <li><b>Processos alinhados ao sistema</b>, eliminando controles paralelos e planilhas</li>
+          <li><b>Informação confiável</b> para fechamento, custos e rentabilidade</li>
+          <li><b>Mais produtividade</b>, com rotinas automatizadas e menos retrabalho</li>
+          <li><b>Melhor retorno do investimento</b> no software, usando o que ele já oferece</li>
+          <li><b>Conhecimento do agro</b> aplicado a cada ajuste, por consultores que vivem o setor</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="servicos">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Serviços</p>
+      <h2>Mais do que software: resultado na operação</h2>
+      <p class="lead">Nosso modelo é consultivo. O foco é eficiência operacional, controle financeiro e crescimento sustentável.</p>
+    </div>
+    <div class="grid g3">
+      <article class="card" id="consultoria">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 16V9m6 7V5m6 11v-6"/></svg></div>
+        <h3>Consultoria especializada em software</h3>
+        <p>Diagnóstico, demonstração técnica, implantação, parametrização, treinamentos e personalizações do ERP.</p>
+      </article>
+      <article class="card" id="processos">
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="12" r="2.5"/><circle cx="6" cy="18" r="2.5"/><path d="M8.5 6H13a3 3 0 0 1 3 3v.5M8.5 18H13a3 3 0 0 0 3-3v-.5"/></svg></div>
+        <h3>Gestão de processos</h3>
+        <p>Mapeamento e melhoria dos processos da empresa para que o sistema reflita a operação real e gere informação confiável.</p>
+      </article>
+      <article class="card" id="outsourcing">
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0 1 12 0M17 11l2 2 3-3"/></svg></div>
+        <h3>Outsourcing</h3>
+        <p>Banco de horas de consultoria e suporte especializado para a sua equipe, com acompanhamento contínuo após a implantação.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="sobre">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">Quem somos</p>
+      <h2>Especialistas em tecnologia para o agronegócio</h2>
+      <p class="lead">Fundada em 2024, a MP Agrotech nasceu para acelerar a transformação digital do agronegócio, com uma equipe multidisciplinar nas áreas comercial, consultoria, implantação, desenvolvimento e suporte.</p>
+      <p class="lead" style="margin-top:22px;font-weight:600;color:var(--ink)">Quem atendemos</p>
+      <div class="chips" style="margin-top:12px">
+        <span>Cooperativas agrícolas</span><span>Distribuidoras e revendas de insumos</span><span>Cerealistas</span><span>Sementeiras</span><span>Agroindústrias de fertilizantes</span><span>Fábricas de ração</span><span>Arrozeiras</span><span>Laticínios</span><span>Fazendas</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Nossos diferenciais</h3>
+      <ul class="checks" style="margin-top:16px">
+        <li>Especialização exclusiva no agronegócio</li>
+        <li>Equipe experiente em ERP para o agro</li>
+        <li>Atendimento próximo, presencial ou remoto</li>
+        <li>Implantação feita por consultores especializados</li>
+        <li>Relacionamento próximo e agilidade nas decisões</li>
+        <li>Desenvolvimento de soluções personalizadas</li>
+      </ul>
+      <div class="values">
+        <span>Ética e transparência</span><span>Relacionamentos de longo prazo</span><span>Excelência no atendimento</span><span>Compromisso com resultados</span><span>Inovação contínua</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="demonstracao">
+  <div class="wrap demo">
+    <div>
+      <p class="eyebrow" style="color:var(--green)">Agende uma demonstração</p>
+      <h2>Veja na prática como fica a sua operação</h2>
+      <p class="lead">Preencha os dados e a conversa abre direto no WhatsApp da MP Agrotech.</p>
+      <ol class="steps" style="color:#d7d9e5">
+        <li>Você conta como a empresa trabalha hoje e o que precisa melhorar.</li>
+        <li>Um especialista prepara a demonstração com a solução certa para o seu segmento.</li>
+        <li>Você vê o sistema funcionando com exemplos da sua realidade.</li>
+      </ol>
+    </div>
+    <form class="form" id="form-demo" novalidate>
+      <div class="row">
+        <label>Seu nome<input name="nome" required autocomplete="name"></label>
+        <label>Empresa<input name="empresa" required autocomplete="organization"></label>
+      </div>
+      <div class="row">
+        <label>Cidade / UF<input name="cidade" autocomplete="address-level2"></label>
+        <label>Segmento
+          <select name="segmento">
+            <option value="">Selecione</option>
+            <option>Cooperativa agrícola</option><option>Distribuidora / revenda de insumos</option><option>Cerealista</option><option>Sementeira</option><option>Agroindústria de fertilizantes</option><option>Fábrica de ração</option><option>Arrozeira</option><option>Laticínio</option><option>Fazenda</option><option>Outro</option>
+          </select>
+        </label>
+      </div>
+      <label>Tenho interesse em
+        <select name="interesse" id="interesse">
+          <option value="">Ainda não sei, quero orientação</option>
+          <option>Viasoft Agrotitan</option><option>Viasoft Filt</option><option>Viasoft CRM</option><option>Viasoft Analytics</option><option>Implantação</option><option>Consultoria de processos</option><option>Outsourcing</option>
+        </select>
+      </label>
+      <input type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+      <label>Conte rapidamente o que precisa (opcional)<textarea name="mensagem"></textarea></label>
+      <button class="btn primary" type="submit">Agendar pelo WhatsApp</button>
+      <p class="note">Ao enviar, seus dados chegam à equipe da MP Agrotech e abrimos o WhatsApp com a mensagem pronta. Veja a <a href="privacidade.html" style="color:var(--green-2)">Política de Privacidade</a>.</p>
+    </form>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Perguntas frequentes</p>
+      <h2>Dúvidas comuns antes de começar</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Quanto tempo leva uma implantação?</summary><p>Em média, de 60 a 90 dias. O prazo exato depende do tamanho da empresa e dos módulos contratados: antes de começar, fazemos um diagnóstico e entregamos um cronograma com as etapas e a data prevista de entrada em operação.</p></details>
+      <details><summary>Vocês migram os dados do sistema que usamos hoje?</summary><p>Sim. Cadastros, saldos e históricos necessários são levantados, migrados e conferidos com a sua equipe antes da virada, para a operação começar com dados confiáveis.</p></details>
+      <details><summary>O sistema funciona para o meu tipo de empresa?</summary><p>As soluções Viasoft atendem cooperativas, cerealistas, sementeiras, revendas de insumos, agroindústrias, laticínios e produtores rurais. No diagnóstico indicamos a solução e os módulos que fazem sentido para a sua operação.</p></details>
+      <details><summary>A equipe de vendas consegue lançar pedidos sem internet?</summary><p>Sim. O Viasoft CRM tem aplicativo para Android e iOS que funciona offline e sincroniza os pedidos quando o celular volta a ter conexão.</p></details>
+      <details><summary>O sistema emite receituário agronômico e NFP-e?</summary><p>Sim. O Viasoft Filt gera o receituário agronômico com assinatura digital, e o Viasoft Agrotitan tem portal do produtor com emissão de NFP-e.</p></details>
+      <details><summary>Os sistemas são em nuvem?</summary><p>O Viasoft Filt e o Viasoft CRM são 100% em nuvem. Para o Agrotitan, avaliamos com você o modelo mais adequado.</p></details>
+      <details><summary>O atendimento é presencial ou remoto?</summary><p>Os dois. Implantação, treinamentos e consultoria podem ser presenciais, remotos ou combinados, conforme a necessidade da sua equipe.</p></details>
+      <details><summary>E depois da implantação, quem dá suporte?</summary><p>A MP Agrotech acompanha a operação depois da virada e oferece banco de horas de consultoria e suporte (Outsourcing) para ajustes, treinamentos e novas rotinas.</p></details>
+      <details><summary>Já usamos um sistema Viasoft. Vocês podem nos ajudar?</summary><p>Sim. A consultoria de processos revisa como a empresa usa o sistema, corrige desvios e ativa recursos que ficaram de lado, sem precisar trocar de software.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="soft" id="suporte">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Suporte e contato</p>
+      <h2>Já é cliente? Fale com o suporte</h2>
+      <p class="lead">Atendimento de segunda a sexta, das 8h às 18h. Fora desse horário, os clientes contam com plantão pelo contato de plantão informado pela MP Agrotech.</p>
+    </div>
+    <div class="support">
+      <article class="card">
+        <h3>Suporte técnico</h3>
+        <p>Dúvidas de uso, ajustes e chamados dos clientes MP Agrotech.</p>
+        <p><a href="mailto:contato@mpagrotech.net?subject=Suporte">contato@mpagrotech.net</a></p>
+      </article>
+      <article class="card">
+        <h3>Comercial e novos projetos</h3>
+        <p>Demonstrações, propostas e novos módulos.</p>
+        <p><a href="mailto:contato@mpagrotech.net?subject=Comercial">contato@mpagrotech.net</a><br><a href="#demonstracao">Agendar demonstração</a></p>
+      </article>
+      <article class="card" id="contato">
+        <h3>Fale com a MP Agrotech</h3>
+        <p>WhatsApp <a href="https://wa.me/5546999824472" target="_blank" rel="noopener">+55 (46) 9 9982-4472</a><br>
+        <a href="mailto:contato@mpagrotech.net">contato@mpagrotech.net</a><br>
+        Rua Tapajós, 435 – Centro, Pato Branco – PR</p>
+      </article>
+    </div>
+    <div class="cbox" style="background:var(--navy);border:0;color:#fff">
+      <img src="img/lauro-retrato.jpg" alt="Lauro, assistente virtual da MP Agrotech" width="640" height="640">
+      <div>
+        <div class="who">Lauro · assistente virtual</div>
+        <h3>Prefere conversar agora?</h3>
+        <p style="color:#c9ccdb;margin:8px 0 20px">O Lauro atende pelo WhatsApp, tira as primeiras dúvidas e passa para um especialista da MP Agrotech quando você quiser.</p>
+        <a class="btn primary" href="https://wa.me/5546999824472" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="flogos"><img src="img/logo-branca.png" alt="MP Agrotech"><span class="fsep"></span><img class="fvia" src="https://pages.viasoft.com.br/marcas/viasoft/assets/logos/viasoft-h-branco.svg" alt="Viasoft"></div>
+    <div style="display:flex;flex-wrap:wrap;gap:18px;align-items:center"><a class="social" href="https://www.instagram.com/mpagrotech/" target="_blank" rel="noopener" aria-label="Instagram da MP Agrotech"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>@mpagrotech</a><span>© 2026 MP Agrotech Ltda · <a href="privacidade.html">Política de Privacidade</a></span></div>
+  </div>
+</footer>
+
+<script>
+const t=document.getElementById('toggle'),m=document.getElementById('menu');
+t.addEventListener('click',()=>{const o=m.classList.toggle('open');t.setAttribute('aria-expanded',o)});
+m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{m.classList.remove('open');t.setAttribute('aria-expanded','false')}));
+
+// Produto pré-selecionado ao clicar em "Agendar demonstração do ..."
+document.querySelectorAll('[data-interesse]').forEach(a=>a.addEventListener('click',()=>{document.getElementById('interesse').value=a.dataset.interesse}));
+// Endereço do Apps Script que grava na planilha e envia e-mail ao contato@ (vazio = só WhatsApp)
+const FORM_URL='https://script.google.com/macros/s/AKfycbxg-pztXxbo-fmdXJ_-GssOpS-8936MQlAF_79M4m8sygI-mixx4CsnAhAByZ4R83Uj/exec';
+// Formulário -> WhatsApp com mensagem pronta
+document.getElementById('form-demo').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=e.target, v=n=>f.elements[n].value.trim();
+  if(!v('nome')||!v('empresa')){ (v('nome')?f.elements.empresa:f.elements.nome).focus(); return; }
+  const linhas=['Olá! Gostaria de agendar uma demonstração.','','Nome: '+v('nome'),'Empresa: '+v('empresa')];
+  if(v('cidade')) linhas.push('Cidade: '+v('cidade'));
+  if(v('segmento')) linhas.push('Segmento: '+v('segmento'));
+  linhas.push('Interesse: '+(v('interesse')||'Quero orientação'));
+  if(v('mensagem')) linhas.push('','Mensagem: '+v('mensagem'));
+  window.open('https://wa.me/5546999824472?text='+encodeURIComponent(linhas.join('\n')),'_blank','noopener');
+  // Cópia para o e-mail contato@ e planilha de leads (Google Apps Script)
+  if(FORM_URL && !v('site')){
+    const dados=new URLSearchParams();
+    ['nome','empresa','cidade','segmento','interesse','mensagem','site'].forEach(n=>dados.append(n,v(n)));
+    dados.append('pagina',location.href);
+    fetch(FORM_URL,{method:'POST',mode:'no-cors',keepalive:true,body:dados}).catch(()=>{});
+  }
+  f.reset();
+});
+</script>
+</body>
+</html>
