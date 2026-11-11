@@ -668,14 +668,20 @@ document.getElementById('form-demo').addEventListener('submit',e=>{
     body.appendChild(c);rolar();
   }
   function botaoWA(l){
-    var linhas=["Olá! Vim pelo site e conversei com o Lauro.","Nome: "+l.nome,"Empresa: "+l.empresa];
-    if(l.cidade)linhas.push("Cidade/UF: "+l.cidade);
-    if(l.segmento)linhas.push("Segmento: "+l.segmento);
-    if(l.interesse)linhas.push("Interesse: "+l.interesse);
-    if(l.resumo)linhas.push("Necessidade: "+l.resumo);
+    var sup=l.tipo==="suporte", linhas;
+    if(sup){linhas=["Olá! Sou cliente da MP Agrotech e preciso de suporte (vim pelo chat do site).","Empresa: "+l.empresa];
+      if(l.nome)linhas.push("Contato: "+l.nome+(l.contato?" · "+l.contato:""));else if(l.contato)linhas.push("Contato: "+l.contato);
+      if(l.sistema)linhas.push("Sistema: "+l.sistema);
+      if(l.resumo)linhas.push("Problema: "+l.resumo);}
+    else{linhas=["Olá! Vim pelo site e conversei com o Lauro.","Nome: "+l.nome,"Empresa: "+l.empresa];
+      if(l.cidade)linhas.push("Cidade/UF: "+l.cidade);
+      if(l.contato)linhas.push("Contato: "+l.contato);
+      if(l.segmento)linhas.push("Segmento: "+l.segmento);
+      if(l.interesse)linhas.push("Interesse: "+l.interesse);
+      if(l.resumo)linhas.push("Necessidade: "+l.resumo);}
     var a=document.createElement("a");a.className="lw-wa";a.target="_blank";a.rel="noopener";
-    a.href="https://wa.me/"+WA+"?text="+encodeURIComponent(linhas.join("\n"));
-    a.textContent="Enviar para a equipe pelo WhatsApp";
+    a.href="https://wa.me/"+((l.whatsapp||WA).replace(/\D/g,""))+"?text="+encodeURIComponent(linhas.join("\n"));
+    a.textContent=sup?"Enviar para o suporte pelo WhatsApp":"Enviar para a equipe comercial pelo WhatsApp";
     body.appendChild(a);rolar();
   }
   function iniciar(){
