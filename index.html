@@ -546,8 +546,9 @@ footer a{color:#d7d9e5}
       <div>
         <div class="who">Lauro · assistente virtual</div>
         <h3>Prefere conversar agora?</h3>
-        <p style="color:#c9ccdb;margin:8px 0 20px">O Lauro atende pelo WhatsApp, tira as primeiras dúvidas e passa para um especialista da MP Agrotech quando você quiser.</p>
-        <a class="btn primary" href="https://wa.me/5546999824472" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        <p style="color:#c9ccdb;margin:8px 0 20px">O Lauro tira as primeiras dúvidas aqui mesmo no site e passa para um especialista da MP Agrotech quando você quiser.</p>
+        <button class="btn primary" type="button" data-lauro-abrir style="border:0;cursor:pointer">Conversar com o Lauro</button>
+        <a href="https://wa.me/5546999824472" target="_blank" rel="noopener" style="display:inline-block;margin-left:14px;color:#c9ccdb;font-weight:600">ou chamar no WhatsApp</a>
       </div>
     </div>
   </div>
@@ -590,6 +591,131 @@ document.getElementById('form-demo').addEventListener('submit',e=>{
   }
   f.reset();
 });
+</script>
+
+<!-- Lauro: assistente virtual no site -->
+<style>
+.lw-fab{position:fixed;right:20px;bottom:20px;z-index:60;width:64px;height:64px;border-radius:50%;border:3px solid var(--green);padding:0;cursor:pointer;background:var(--navy);box-shadow:0 8px 24px rgba(32,35,58,.28);overflow:visible}
+.lw-fab img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block}
+.lw-fab .lw-dot{position:absolute;right:2px;bottom:2px;width:14px;height:14px;border-radius:50%;background:var(--green-2);border:2px solid #fff}
+.lw-fab .lw-tip{position:absolute;right:76px;bottom:12px;white-space:nowrap;background:#fff;color:var(--ink);font:600 14px var(--f-body);padding:9px 13px;border-radius:10px;box-shadow:0 6px 18px rgba(32,35,58,.18)}
+.lw-fab.lw-on .lw-tip{display:none}
+.lw-panel{position:fixed;right:20px;bottom:96px;z-index:61;width:370px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 120px);background:#fff;border-radius:16px;box-shadow:0 18px 48px rgba(32,35,58,.32);display:none;flex-direction:column;overflow:hidden;font-family:var(--f-body);color:var(--ink)}
+.lw-panel.lw-open{display:flex}
+.lw-head{background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:14px 14px 14px 16px}
+.lw-head img{width:42px;height:42px;border-radius:50%;object-fit:cover;border:2px solid var(--green)}
+.lw-head b{display:block;font:700 15px var(--f-head)}
+.lw-head small{color:#c9ccdb;font-size:13px}
+.lw-x{margin-left:auto;background:none;border:0;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:4px 8px;border-radius:8px}
+.lw-x:hover{background:rgba(255,255,255,.12)}
+.lw-body{flex:1;overflow-y:auto;padding:16px;background:var(--soft);display:flex;flex-direction:column;gap:8px}
+.lw-msg{max-width:85%;padding:10px 13px;border-radius:14px;font-size:15px;line-height:1.45;white-space:pre-wrap;word-wrap:break-word}
+.lw-bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px}
+.lw-me{align-self:flex-end;background:var(--navy);color:#fff;border-bottom-right-radius:4px}
+.lw-info{align-self:center;font-size:13px;color:var(--muted);text-align:center;padding:2px 8px}
+.lw-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.lw-chips button{font:600 13px var(--f-body);background:#fff;color:var(--navy);border:1px solid var(--line);border-radius:999px;padding:7px 11px;cursor:pointer}
+.lw-chips button:hover{border-color:var(--green-2)}
+.lw-wa{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#0b3d1f;font:700 14px var(--f-head);text-decoration:none;padding:11px 15px;border-radius:10px}
+.lw-typing{align-self:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;gap:4px}
+.lw-typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);opacity:.4;animation:lwb 1s infinite}
+.lw-typing i:nth-child(2){animation-delay:.15s}.lw-typing i:nth-child(3){animation-delay:.3s}
+@keyframes lwb{50%{opacity:1;transform:translateY(-3px)}}
+.lw-form{display:flex;gap:8px;padding:10px;border-top:1px solid var(--line);background:#fff}
+.lw-form textarea{flex:1;resize:none;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:15px var(--f-body);color:var(--ink);max-height:96px;min-height:44px}
+.lw-form textarea:focus{outline:2px solid var(--green-2);outline-offset:-1px}
+.lw-form button{border:0;background:var(--green);color:var(--navy-3);font:700 14px var(--f-head);border-radius:10px;padding:0 14px;cursor:pointer}
+.lw-form button:disabled{opacity:.5;cursor:default}
+.lw-legal{font-size:12px;color:var(--muted);padding:0 12px 10px;background:#fff}
+.lw-legal a{color:var(--green-2)}
+@media (max-width:520px){
+  .lw-panel{right:0;bottom:0;width:100vw;max-width:100vw;height:100%;max-height:100%;border-radius:0}
+  .lw-fab{right:16px;bottom:16px}
+  .lw-fab .lw-tip{display:none}
+}
+@media (prefers-reduced-motion:reduce){.lw-typing i{animation:none}}
+</style>
+<button class="lw-fab" type="button" aria-label="Conversar com o Lauro, assistente virtual" aria-controls="lw-panel" aria-expanded="false">
+  <img src="img/lauro-avatar.jpg" alt="" width="56" height="56"><span class="lw-dot"></span><span class="lw-tip">Dúvidas? Fale com o Lauro</span>
+</button>
+<div class="lw-panel" id="lw-panel" role="dialog" aria-label="Conversa com o Lauro">
+  <div class="lw-head"><img src="img/lauro-avatar.jpg" alt="" width="42" height="42"><div><b>Lauro</b><small>Assistente virtual · MP Agrotech</small></div><button class="lw-x" type="button" aria-label="Fechar conversa">×</button></div>
+  <div class="lw-body" aria-live="polite"></div>
+  <form class="lw-form"><textarea rows="1" maxlength="600" placeholder="Escreva sua dúvida…" aria-label="Sua mensagem"></textarea><button type="submit">Enviar</button></form>
+  <div class="lw-legal">Atendimento por inteligência artificial; pode cometer erros. Não envie dados sensíveis. <a href="privacidade.html">Privacidade</a></div>
+</div>
+<script>
+(function(){
+  var API="https://lauro-server.onrender.com";
+  var WA="5546999824472";
+  var fab=document.querySelector(".lw-fab"), panel=document.getElementById("lw-panel"), body=panel.querySelector(".lw-body"),
+      form=panel.querySelector(".lw-form"), input=form.querySelector("textarea"), sendBtn=form.querySelector("button");
+  var hist=[], busy=false, started=false, acordado=false;
+  function load(){try{var s=JSON.parse(sessionStorage.getItem("lw-hist")||"[]");if(Array.isArray(s))hist=s;}catch(e){}}
+  function save(){try{sessionStorage.setItem("lw-hist",JSON.stringify(hist.slice(-40)));}catch(e){}}
+  function acordar(){if(acordado)return;acordado=true;try{fetch(API+"/",{mode:"cors"}).catch(function(){});}catch(e){}}
+  function el(cls,txt){var d=document.createElement("div");d.className=cls;if(txt!=null)d.textContent=txt;return d;}
+  function rolar(){body.scrollTop=body.scrollHeight;}
+  function bot(t){body.appendChild(el("lw-msg lw-bot",t));rolar();}
+  function me(t){body.appendChild(el("lw-msg lw-me",t));rolar();}
+  function info(t){body.appendChild(el("lw-info",t));rolar();}
+  function saudacao(){var h=new Date().getHours();return h<12?"Bom dia":h<18?"Boa tarde":"Boa noite";}
+  function chips(){
+    var c=el("lw-chips");
+    ["Quais soluções vocês têm?","Quanto tempo leva uma implantação?","Quero agendar uma demonstração","Já sou cliente, preciso de suporte"].forEach(function(q){
+      var b=document.createElement("button");b.type="button";b.textContent=q;
+      b.onclick=function(){c.remove();enviar(q);};c.appendChild(b);});
+    body.appendChild(c);rolar();
+  }
+  function botaoWA(l){
+    var linhas=["Olá! Vim pelo site e conversei com o Lauro.","Nome: "+l.nome,"Empresa: "+l.empresa];
+    if(l.cidade)linhas.push("Cidade/UF: "+l.cidade);
+    if(l.segmento)linhas.push("Segmento: "+l.segmento);
+    if(l.interesse)linhas.push("Interesse: "+l.interesse);
+    if(l.resumo)linhas.push("Necessidade: "+l.resumo);
+    var a=document.createElement("a");a.className="lw-wa";a.target="_blank";a.rel="noopener";
+    a.href="https://wa.me/"+WA+"?text="+encodeURIComponent(linhas.join("\n"));
+    a.textContent="Enviar para a equipe pelo WhatsApp";
+    body.appendChild(a);rolar();
+  }
+  function iniciar(){
+    if(started)return;started=true;load();
+    if(hist.length){hist.forEach(function(m){(m.role==="user"?me:bot)(m.content);});}
+    else{bot(saudacao()+"! Eu sou o Lauro, assistente virtual da MP Agrotech. Posso tirar dúvidas sobre nossas soluções de gestão para o agro, implantação e consultoria. Em que posso ajudar?");chips();}
+  }
+  function abrir(){iniciar();acordar();panel.classList.add("lw-open");fab.classList.add("lw-on");fab.setAttribute("aria-expanded","true");setTimeout(function(){input.focus();},50);}
+  function fechar(){panel.classList.remove("lw-open");fab.classList.remove("lw-on");fab.setAttribute("aria-expanded","false");fab.focus();}
+  fab.onclick=function(){panel.classList.contains("lw-open")?fechar():abrir();};
+  panel.querySelector(".lw-x").onclick=fechar;
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&panel.classList.contains("lw-open"))fechar();});
+  document.querySelectorAll("[data-lauro-abrir]").forEach(function(b){b.addEventListener("click",function(e){e.preventDefault();abrir();});});
+  function enviar(texto){
+    texto=(texto||"").trim();if(!texto||busy)return;
+    busy=true;sendBtn.disabled=true;
+    var ch=body.querySelector(".lw-chips");if(ch)ch.remove();
+    me(texto);hist.push({role:"user",content:texto});save();
+    var t=el("lw-typing");t.innerHTML="<i></i><i></i><i></i>";body.appendChild(t);rolar();
+    var aviso=setTimeout(function(){info("Só um instante, estou abrindo o atendimento…");},7000);
+    var ctrl=("AbortController" in window)?new AbortController():null;
+    var limite=setTimeout(function(){if(ctrl)ctrl.abort();},75000);
+    fetch(API+"/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({mensagens:hist}),signal:ctrl?ctrl.signal:undefined})
+      .then(function(r){return r.json().catch(function(){return {};});})
+      .then(function(d){
+        var ms=(d&&Array.isArray(d.mensagens)&&d.mensagens.length)?d.mensagens:["Tive um probleminha para responder agora. Pode tentar de novo? Se preferir, a equipe atende pelo WhatsApp (46) 9 9982-4472."];
+        t.remove();ms.forEach(bot);
+        if(d&&Array.isArray(d.mensagens)&&!d.erro){hist.push({role:"assistant",content:ms.join("\n")});save();}
+        else{hist.pop();save();}
+        if(d&&d.lead)botaoWA(d.lead);
+      })
+      .catch(function(){t.remove();hist.pop();save();bot("Não consegui me conectar agora. Pode tentar de novo em instantes ou falar com a equipe pelo WhatsApp (46) 9 9982-4472.");})
+      .then(function(){clearTimeout(aviso);clearTimeout(limite);busy=false;sendBtn.disabled=false;input.focus();});
+  }
+  form.addEventListener("submit",function(e){e.preventDefault();var v=input.value;input.value="";input.style.height="";enviar(v);});
+  input.addEventListener("keydown",function(e){if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();form.requestSubmit?form.requestSubmit():form.dispatchEvent(new Event("submit"));}});
+  input.addEventListener("input",function(){input.style.height="";input.style.height=Math.min(input.scrollHeight,96)+"px";});
+  // acorda o servidor alguns segundos depois de a página abrir, antes do visitante precisar
+  setTimeout(acordar,2500);
+})();
 </script>
 </body>
 </html>
